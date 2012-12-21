@@ -1,14 +1,14 @@
 class CoinChange
 
-    @@avaiableCoins = [1,5,10,25,100]
-    @@emptyChange = @@avaiableCoins.inject({}) { |result, coin| result.merge({coin => 0})}
+    @@avaiable_coins = [1,5,10,25,100]
+    @@empty_change = @@avaiable_coins.inject({}) { |result, coin| result.merge({coin => 0})}
 
     def change_for amount
         if amount == 0
-            @@emptyChange
+            @@empty_change
         else
-            biggestChange = biggest_single_coin_change amount
-            remainderValue = amount - biggestChange
+            biggest_change = biggest_single_coin_change amount
+            remainder_value = amount - biggestChange
 
             change_for(remainderValue).merge({biggestChange => 1}) { |key, oldValue, newValue| oldValue + newValue}
         end
@@ -17,7 +17,7 @@ class CoinChange
     private
 
     def biggest_single_coin_change amount
-        @@avaiableCoins.select { |key| key <= amount}.max
+        @@avaiable_coins.select { |key| key <= amount}.max
     end
 
 end
